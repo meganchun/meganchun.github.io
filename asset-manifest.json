@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/meganchun.github.io/static/css/main.78730be5.css",
-    "main.js": "/meganchun.github.io/static/js/main.0b72b384.js",
-    "static/media/headshot.png": "/meganchun.github.io/static/media/headshot.4771367cb4542ebba8c3.png",
-    "static/media/Binge.png": "/meganchun.github.io/static/media/Binge.d1d7c1d6570f49ebf22d.png",
-    "static/media/FindMyUni.png": "/meganchun.github.io/static/media/FindMyUni.c97d956e7900ed22594c.png",
-    "static/media/Bohnanza.png": "/meganchun.github.io/static/media/Bohnanza.5ecad11e1a4dc6c5f167.png",
-    "static/media/Portfolio v.1.png": "/meganchun.github.io/static/media/Portfolio v.1.0a13398c2e9182cca377.png",
-    "static/media/Meglino.png": "/meganchun.github.io/static/media/Meglino.04e5929823bdc34b2a59.png",
-    "static/media/Super Foodio.png": "/meganchun.github.io/static/media/Super Foodio.6cc87ab700c48c71b78f.png",
-    "static/media/Laptop Store.png": "/meganchun.github.io/static/media/Laptop Store.e88cf1149bb27dfd8986.png",
-    "static/media/Portfolio v.2.png": "/meganchun.github.io/static/media/Portfolio v.2.d19a1b148ee28b303d56.png",
-    "index.html": "/meganchun.github.io/index.html",
-    "main.78730be5.css.map": "/meganchun.github.io/static/css/main.78730be5.css.map",
-    "main.0b72b384.js.map": "/meganchun.github.io/static/js/main.0b72b384.js.map"
+    "main.css": "/static/css/main.78730be5.css",
+    "main.js": "/static/js/main.5b33417e.js",
+    "static/media/headshot.png": "/static/media/headshot.4771367cb4542ebba8c3.png",
+    "static/media/Binge.png": "/static/media/Binge.d1d7c1d6570f49ebf22d.png",
+    "static/media/FindMyUni.png": "/static/media/FindMyUni.c97d956e7900ed22594c.png",
+    "static/media/Bohnanza.png": "/static/media/Bohnanza.5ecad11e1a4dc6c5f167.png",
+    "static/media/Portfolio v.1.png": "/static/media/Portfolio v.1.0a13398c2e9182cca377.png",
+    "static/media/Meglino.png": "/static/media/Meglino.04e5929823bdc34b2a59.png",
+    "static/media/Super Foodio.png": "/static/media/Super Foodio.6cc87ab700c48c71b78f.png",
+    "static/media/Laptop Store.png": "/static/media/Laptop Store.e88cf1149bb27dfd8986.png",
+    "static/media/Portfolio v.2.png": "/static/media/Portfolio v.2.d19a1b148ee28b303d56.png",
+    "index.html": "/index.html",
+    "main.78730be5.css.map": "/static/css/main.78730be5.css.map",
+    "main.5b33417e.js.map": "/static/js/main.5b33417e.js.map"
   },
   "entrypoints": [
     "static/css/main.78730be5.css",
-    "static/js/main.0b72b384.js"
+    "static/js/main.5b33417e.js"
   ]
 }
