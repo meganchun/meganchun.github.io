@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.a4b2ac2f.css",
-    "main.js": "/static/js/main.ec582d29.js",
+    "main.js": "/static/js/main.93e0b4b6.js",
     "static/media/headshot.png": "/static/media/headshot.4771367cb4542ebba8c3.png",
     "static/media/Binge.png": "/static/media/Binge.d1d7c1d6570f49ebf22d.png",
     "static/media/FindMyUni.png": "/static/media/FindMyUni.c97d956e7900ed22594c.png",
@@ -15,10 +15,10 @@
     "static/media/Coming Soon.png": "/static/media/Coming Soon.35e67bfdc9c89cb4e47d.png",
     "index.html": "/index.html",
     "main.a4b2ac2f.css.map": "/static/css/main.a4b2ac2f.css.map",
-    "main.ec582d29.js.map": "/static/js/main.ec582d29.js.map"
+    "main.93e0b4b6.js.map": "/static/js/main.93e0b4b6.js.map"
   },
   "entrypoints": [
     "static/css/main.a4b2ac2f.css",
-    "static/js/main.ec582d29.js"
+    "static/js/main.93e0b4b6.js"
   ]
 }
