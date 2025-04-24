@@ -1,11 +1,12 @@
 {
   "name": "website-3.0",
-  "homepage": "https://meganchun.github.io/meganchun.github.io",
+  "homepage": "https://meganchun.github.io",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",
     "@flaticon/flaticon-uicons": "^3.3.1",
+    "@fortawesome/free-brands-svg-icons": "^6.7.2",
     "@fortawesome/free-solid-svg-icons": "^6.7.2",
     "@fortawesome/react-fontawesome": "^0.2.2",
     "@react-icons/all-files": "^4.1.0",
@@ -19,7 +20,9 @@
     "react-dom": "^18.3.1",
     "react-fontawesome": "^1.7.1",
     "react-icons": "^5.4.0",
+    "react-multi-carousel": "^2.8.6",
     "react-scripts": "5.0.1",
+    "react-spring-3d-carousel": "^1.3.4",
     "typewriter-effect": "^2.21.0"
   },
   "scripts": {
