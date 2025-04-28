@@ -4,25 +4,30 @@ export default function Banner() {
   const items = [
     "Developer",
     "Foodie",
-    "Coder",
+    "Matcha Lover",
     "Tinkerer",
-    "Debugger",
+    "Explorer",
     "Builder",
     "Thinker",
-    "Writer",
+    "Coffee Lover",
     "Explorer",
     "Maker",
     "Learner",
+    "Pineapple Pizza Fan",
   ];
 
   return (
     <div className="overflow-hidden whitespace-nowrap w-full bg-white py-2">
-      <div className="inline-block flex flex-row animate-marquee gap-4">
+      <div className="inline-block flex gap-4 animate-marquee">
         {items.map((item, index) => (
-          <Pill type="outline" key={index}>{item}</Pill>
+          <Pill type="outline" key={index}>
+            {item}
+          </Pill>
         ))}
         {items.map((item, index) => (
-          <Pill type="outline" key={`dupe-${index}`}>{item}</Pill>
+          <Pill type="outline" key={`dupe-${index}`}>
+            {item}
+          </Pill>
         ))}
       </div>
     </div>

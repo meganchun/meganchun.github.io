@@ -1,12 +1,10 @@
 import React from "react";
 import Carousel from "react-spring-3d-carousel";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { config } from "react-spring";
 import ProjectCard from "./ProjectCard";
-import { v4 as uuidv4 } from "uuid";
 
 export default function Carousel3D() {
-  const [offset, setOffset] = useState(2);
   const projects = [
     {
       name: "goSnooze",
@@ -55,7 +53,7 @@ export default function Carousel3D() {
 
   const [goToSlide, setGoToSlide] = useState(0);
   const slides = projects.map((project, index) => ({
-    key: uuidv4(),
+    key: index,
     content: (
       <ProjectCard
         project={project}
@@ -71,7 +69,7 @@ export default function Carousel3D() {
       <Carousel
         slides={slides}
         goToSlide={goToSlide}
-        offsetRadius={offset}
+        offsetRadius={2}
         showNavigation={false}
         animationConfig={config.gentle}
       />

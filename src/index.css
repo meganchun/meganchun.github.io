@@ -15,7 +15,7 @@ body {
 
 @layer base {
   h1 {
-    @apply text-4xl font-semibold; 
+    @apply text-4xl font-semibold;
   }
   h2 {
     @apply text-xl font-semibold;

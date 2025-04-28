@@ -1,17 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { motion } from "motion/react";
-import {
-  faLocationDot,
-  faHeart,
-  faEnvelope,
-} from "@fortawesome/free-solid-svg-icons";
+import { faLocationDot, faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { faLinkedin, faGithub } from "@fortawesome/free-brands-svg-icons";
 import Pill from "./components/Pill";
 import Banner from "./components/Banner";
 import "react-multi-carousel/lib/styles.css";
 import ExperienceCard from "./components/ExperienceCard";
 import Carousel3D from "./components/Carousel";
+import LikeButton from "./components/LikeButton";
 
 function App() {
   React.useEffect(() => {
@@ -46,14 +43,6 @@ function App() {
     { name: "Ignition Hacks", role: "Co-Director" },
   ]);
   const [hoveredCard, setHoveredCard] = useState(null);
-  const [userLocation, setUserLocation] = useState("");
-
-  useEffect(() => {
-    fetch("https://ipwho.is/")
-      .then((res) => res.json())
-      .then((data) => setUserLocation(`${data.city}, ${data.region_code}`))
-      .catch((err) => console.error("Location fetch error:", err));
-  }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -66,94 +55,17 @@ function App() {
     return () => clearInterval(interval);
   }, []);
 
-  const projects = [
-    {
-      name: "test0",
-      description: "mobile app for GO transit users",
-      link: "https://picsum.photos/800/800/?random",
-      image: "https://picsum.photos/800/800/?random",
-    },
-    {
-      name: "test1",
-      description: "mobile app for GO transit users",
-      link: "https://picsum.photos/800/800/?random",
-      image: "https://picsum.photos/800/800/?random",
-    },
-    {
-      name: "test3",
-      description: "mobile app for GO transit users",
-      link: "https://picsum.photos/800/800/?random",
-      image: "https://picsum.photos/800/800/?random",
-    },
-    {
-      name: "test4",
-      description: "mobile app for GO transit users",
-      link: "https://picsum.photos/800/800/?random",
-      image: "https://picsum.photos/800/800/?random",
-    },
-    {
-      name: "test5",
-      description: "mobile app for GO transit users",
-      link: "https://picsum.photos/800/800/?random",
-      image: "https://picsum.photos/800/800/?random",
-    },
-  ];
-
-  const handleLike = async (event) => {
-    event.preventDefault();
-
-    const formData = new FormData(event.target);
-
-    try {
-      await fetch("https://formsubmit.co/meganwchun@gmail.com", {
-        method: "POST",
-        body: formData,
-      });
-    } catch (error) {
-      console.error("Error submitting form:", error);
-    }
-  };
-
   return (
     <div class="App flex flex-col w-full relative items-center overflow-hidden">
       <Banner />
-
-      <div className="fixed bottom-2 left-1/2 transform -translate-x-1/2 z-[100]">
-        <div className="bg-[#fff]/50 backdrop-blur-lg px-2 py-1 rounded-full">
-          <form
-            action="https://formsubmit.co/meganwchun@gmail.com"
-            method="POST"
-            data-formsubmit="true"
-            onSubmit={handleLike}
-          >
-            <input type="hidden" name="_subject" value="New Like!" />
-            <input type="hidden" name="_captcha" value="false" />
-            <input
-              type="text"
-              name="user-location"
-              value={userLocation}
-              hidden
-            />
-
-            <button type="submit" className="flex flex-row gap-2 items-center">
-              <div className="w-7 h-7 bg-primary-light rounded-full relative">
-                <FontAwesomeIcon
-                  icon={faHeart}
-                  className="text-primary absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
-                />
-              </div>
-              <p className="text-primary">12</p>
-            </button>
-          </form>
-        </div>
-      </div>
+      <LikeButton />
 
       {/* Header Section */}
       <motion.header
         initial={{ scale: 0.5 }}
         animate={{ scale: 1 }}
         transition={{ duration: 0.5 }}
-        class="header justify-center w-[351px] flex flex-col gap-6 items-start h-[90vh]"
+        class="header justify-center w-[351px] flex flex-col gap-6 items-start h-[80vh]"
       >
         <div className="flex flex-col gap-2">
           <div className="location flex items-center gap-2 text-text-secondary">
@@ -165,14 +77,15 @@ function App() {
         </div>
 
         <p className="description text-text-secondary text-sm/[23px]">
-          Hey! Glad you could stop by. I’m currently a student at the University
-          of Waterloo, who’s passionate about driving change through technology.
-          When i’m not studying you’ll probably find me:
+          Hey! Thanks for stopping by. I'm a student at the University of
+          Waterloo, driven by a belief that technology should make life more
+          enjoyable and meaningful — not just more transactional. When I'm not
+          studying, you’ll probably find me:
         </p>
         <div className="ml-2 text-text-secondary">
-          <p>1. trying new cafe</p>
-          <p>2. drinking a coffee or matcha</p>
-          <p>3. at the gym or computer</p>
+          <p>1. Trying new cafe</p>
+          <p>2. Drinking a coffee or matcha</p>
+          <p>3. At the gym or computer</p>
         </div>
       </motion.header>
 
@@ -246,6 +159,7 @@ function App() {
                 href="https://github.com/meganchun"
                 target="_blank"
                 className="underline"
+                rel="noopener noreferrer"
               >
                 GitHub.
               </a>
@@ -268,6 +182,7 @@ function App() {
             href="https://www.linkedin.com/in/meganchun"
             target="_blank"
             className="hover:text-primary transition-colors"
+            rel="noopener noreferrer"
           >
             <FontAwesomeIcon icon={faLinkedin} />
           </a>
@@ -276,6 +191,7 @@ function App() {
             href="https://github.com/meganchun"
             target="_blank"
             className="hover:text-primary transition-colors"
+            rel="noopener noreferrer"
           >
             <FontAwesomeIcon icon={faGithub} />
           </a>
@@ -283,6 +199,7 @@ function App() {
           <a
             href="mailto:megan.chun@uwaterloo.ca"
             className="hover:text-primary transition-colors"
+            rel="noopener noreferrer"
           >
             <FontAwesomeIcon icon={faEnvelope} />
           </a>

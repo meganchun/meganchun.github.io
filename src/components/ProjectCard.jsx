@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 export default function ProjectCard({ project, isCenter }) {
   const handleProjectClick = (link) => {
@@ -14,14 +14,16 @@ export default function ProjectCard({ project, isCenter }) {
         }
       }}
     >
-      <div className="relative rounded-lg overflow-hidden w-full h-[auto]">
+      <div className="relative rounded-lg overflow-hidden w-full flex justify-center h-[auto]">
         <img
           src={require(`../images/${project.name
             .toLowerCase()
             .split(" ")
             .join("-")}.png`)}
           alt={project.name}
-          className="relative w-full h-full object-cover rounded-l"
+          className={`${
+            isCenter && "hover:scale-110"
+          } relative w-[90%] h-full object-cover transition duration-300 ease-in-out`}
         />
       </div>
 
