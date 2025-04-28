@@ -9,9 +9,9 @@ import {
 import { faLinkedin, faGithub } from "@fortawesome/free-brands-svg-icons";
 import Pill from "./components/Pill";
 import Banner from "./components/Banner";
-import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import ExperienceCard from "./components/ExperienceCard";
+import Carousel3D from "./components/Carousel";
 
 function App() {
   React.useEffect(() => {
@@ -46,26 +46,7 @@ function App() {
     { name: "Ignition Hacks", role: "Co-Director" },
   ]);
   const [hoveredCard, setHoveredCard] = useState(null);
-  const [goToSlide, setGoToSlide] = useState(0);
   const [userLocation, setUserLocation] = useState("");
-  const responsive = {
-    superLargeDesktop: {
-      breakpoint: { max: 4000, min: 3000 },
-      items: 5,
-    },
-    desktop: {
-      breakpoint: { max: 3000, min: 1024 },
-      items: 3,
-    },
-    tablet: {
-      breakpoint: { max: 1024, min: 464 },
-      items: 2,
-    },
-    mobile: {
-      breakpoint: { max: 464, min: 0 },
-      items: 1,
-    },
-  };
 
   useEffect(() => {
     fetch("https://ipwho.is/")
@@ -118,10 +99,6 @@ function App() {
     },
   ];
 
-  const handleProjectClick = (link) => {
-    console.log(link);
-  };
-
   const handleLike = async (event) => {
     event.preventDefault();
 
@@ -136,36 +113,40 @@ function App() {
       console.error("Error submitting form:", error);
     }
   };
-  useEffect(() => {
-    console.log(goToSlide);
-  }, [goToSlide]);
+
   return (
     <div class="App flex flex-col w-full relative items-center overflow-hidden">
       <Banner />
 
-      <form
-        action="https://formsubmit.co/meganwchun@gmail.com"
-        method="POST"
-        data-formsubmit="true"
-        onSubmit={handleLike}
-      >
-        <input type="hidden" name="_subject" value="New Like!" />
-        <input type="hidden" name="_captcha" value="false" />
-        <input type="text" name="user-location" value={userLocation} hidden />
-        <button
-          type="submit"
-          className="fixed bottom-0 mb-8 flex flex-row gap-2 items-center w-content px-4 py-2 bg-white/80 z-[100] rounded-full left-1/2 transform -translate-x-1/2 z-1000"
-        >
-          <div className="w-8 h-8 bg-primary-light rounded-full relative">
-            <FontAwesomeIcon
-              icon={faHeart}
-              className="text-primary absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-1000"
+      <div className="fixed bottom-2 left-1/2 transform -translate-x-1/2 z-[100]">
+        <div className="bg-[#fff]/50 backdrop-blur-lg px-2 py-1 rounded-full">
+          <form
+            action="https://formsubmit.co/meganwchun@gmail.com"
+            method="POST"
+            data-formsubmit="true"
+            onSubmit={handleLike}
+          >
+            <input type="hidden" name="_subject" value="New Like!" />
+            <input type="hidden" name="_captcha" value="false" />
+            <input
+              type="text"
+              name="user-location"
+              value={userLocation}
+              hidden
             />
-          </div>
 
-          <p className="text-primary-light">12</p>
-        </button>
-      </form>
+            <button type="submit" className="flex flex-row gap-2 items-center">
+              <div className="w-7 h-7 bg-primary-light rounded-full relative">
+                <FontAwesomeIcon
+                  icon={faHeart}
+                  className="text-primary absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+                />
+              </div>
+              <p className="text-primary">12</p>
+            </button>
+          </form>
+        </div>
+      </div>
 
       {/* Header Section */}
       <motion.header
@@ -208,7 +189,7 @@ function App() {
             <div className="experience-title absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
               <h2 className="text-text">My Experience</h2>
               <p className="text-text-secondary">
-                What i've been up to + my past adventures
+                What I've been up to + my past adventures.
               </p>
             </div>
 
@@ -254,58 +235,24 @@ function App() {
         whileInView={{ scale: 1 }}
         transition={{ duration: 0.5 }}
         viewport={{ amount: 0.1 }}
-        class="projects flex flex-col w-full justify-center text-center items-center mb-36"
+        class="projects flex flex-col w-full justify-center text-center items-center mb-48"
       >
-        <div className="project-header flex flex-col gap-8">
+        <div className="project-header flex flex-col gap-36 sm:gap-48 md:gap-60">
           <div className="title-wrapper">
             <h2 className="text-text">My Projects</h2>
-            <p className="text-text-secondary">
+            <p className="text-text-secondary z-[100]">
               Want to learn more? Check out my{" "}
-              <span className="underline">Github</span>
+              <a
+                href="https://github.com/meganchun"
+                target="_blank"
+                className="underline"
+              >
+                GitHub.
+              </a>
             </p>
           </div>
 
-          <div className="carousel-container flex flex-col w-[90vw]">
-            <Carousel
-              swipeable
-              showDots
-              responsive={responsive}
-              renderDotsOutside
-              centerMode
-              infinite
-              ssr
-              keyBoardControl
-              customTransition="transform 500ms ease-in-out"
-              transitionDuration={500}
-              containerClass="carousel-container"
-              dotListClass="mt-6 flex justify-center items-center gap-2"
-              itemClass="carousel-item-padding-40-px"
-              afterChange={(index) => setGoToSlide(index)}
-              removeArrowOnDeviceType={["tablet", "mobile"]}
-            >
-              {projects.map((project, index) => (
-                <div
-                  key={index}
-                  className="flex flex-col items-center p-4"
-                  onClick={() => handleProjectClick(project.link)}
-                >
-                  <img
-                    src={project.image}
-                    alt={project.name}
-                    className={`rounded-lg transition-all duration-300 ${
-                      goToSlide === index
-                        ? "ring-2 ring-primary shadow-lg"
-                        : "opacity-80"
-                    }`}
-                  />
-                  <p className="font-bold mt-2">{project.name}</p>
-                  <p className="text-sm text-text-secondary">
-                    {project.description}
-                  </p>
-                </div>
-              ))}
-            </Carousel>
-          </div>
+          <Carousel3D />
         </div>
       </motion.div>
       <motion.footer
@@ -313,14 +260,12 @@ function App() {
         whileInView={{ scale: 1 }}
         transition={{ duration: 0.5 }}
         viewport={{ amount: 0.1 }}
-        class="flex flex-col m-10 sm:m-10 md:m-20 items-center gap-2"
+        class="flex flex-col mt-10 sm:mt-24 md:mt-36 mb-12 items-center gap-2"
       >
-        <p className="text-text-secondary">
-          Thanks for taking the time to check out my corner of the internet.
-        </p>
+        <p className="text-text-secondary">Megan Chun. 2025.</p>
         <div className="socials flex gap-8 text-text-secondary">
           <a
-            href="https://www.linkedin.com/in/your-profile"
+            href="https://www.linkedin.com/in/meganchun"
             target="_blank"
             className="hover:text-primary transition-colors"
           >
@@ -328,7 +273,7 @@ function App() {
           </a>
 
           <a
-            href="https://github.com/your-username"
+            href="https://github.com/meganchun"
             target="_blank"
             className="hover:text-primary transition-colors"
           >

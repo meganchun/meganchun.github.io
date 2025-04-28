@@ -14,7 +14,7 @@ export default function ExperienceCard({ isHovered, text, role, className }) {
             .split(" ")
             .join("-")}.png`)}
           alt={text}
-          className=" w-3/4 sm:w-auto aspect-square absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+          className=" w-[50px] sm:w-[70px] aspect-square absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
         />
       </div>
       <div className="h-[24px] mt-4 z-10">
@@ -26,11 +26,11 @@ export default function ExperienceCard({ isHovered, text, role, className }) {
           {text}
         </p>
         <p
-          className={`text-primary-light italic transition-opacity duration-200 ${
+          className={`text-primary-light text-xs transition-opacity duration-200 ${
             isHovered ? "opacity-100" : "opacity-0"
           }`}
         >
-          {role}
+          {role.toUpperCase()}
         </p>
       </div>
     </div>
