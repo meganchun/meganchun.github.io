@@ -13,7 +13,6 @@ export default function Banner() {
     "Explorer",
     "Maker",
     "Learner",
-    "Pineapple Pizza Fan",
   ];
 
   return (
