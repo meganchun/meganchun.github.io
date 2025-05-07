@@ -31,7 +31,7 @@ export default function LikeButton() {
       await updateDoc(docRef, { count: increment(1) });
       setLikes((prev) => prev + 1);
 
-      await fetch("https://formsubmit.co/meganwchun@gmail.com", {
+      await fetch("https://formsubmit.co/d01c7b2fa41ce2c7c1372175f3d4ab69", {
         method: "POST",
         body: formData,
       });
