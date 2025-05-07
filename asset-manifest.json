@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.c81bacd7.css",
-    "main.js": "/static/js/main.c818539a.js",
+    "main.js": "/static/js/main.ffe7cb62.js",
     "static/media/binge.png": "/static/media/binge.b904ccaf3476c45c5bfd.png",
     "static/media/findmyuni.png": "/static/media/findmyuni.e15f9a6e91bc5d6ca78b.png",
     "static/media/bohnanza.png": "/static/media/bohnanza.375e8e0c3267e8917078.png",
@@ -16,10 +16,10 @@
     "static/media/revicons.woff": "/static/media/revicons.e8746a624ed098489406.woff",
     "index.html": "/index.html",
     "main.c81bacd7.css.map": "/static/css/main.c81bacd7.css.map",
-    "main.c818539a.js.map": "/static/js/main.c818539a.js.map"
+    "main.ffe7cb62.js.map": "/static/js/main.ffe7cb62.js.map"
   },
   "entrypoints": [
     "static/css/main.c81bacd7.css",
-    "static/js/main.c818539a.js"
+    "static/js/main.ffe7cb62.js"
   ]
 }
