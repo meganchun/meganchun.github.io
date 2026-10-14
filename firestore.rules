@@ -1,0 +1,81 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() { return request.auth != null; }
+    function counterPath() { return /databases/$(database)/documents/likes/portfolio; }
+    function visitorPath() { return /databases/$(database)/documents/likes/portfolio/visitors/$(request.auth.uid); }
+    function eventPath(id) { return /databases/$(database)/documents/likes/portfolio/events/$(id); }
+    function starPath(id) { return /databases/$(database)/documents/likes/portfolio/stars/$(id); }
+    function cooldownExpired() {
+      return !exists(visitorPath())
+        || request.time >= get(visitorPath()).data.lastLikedAt + duration.value(2, 'm');
+    }
+    function validCommit(id) {
+      let counter = getAfter(counterPath()).data;
+      let visitor = getAfter(visitorPath()).data;
+      let event = getAfter(eventPath(id)).data;
+      let star = getAfter(starPath(id)).data;
+      return cooldownExpired()
+        && !exists(eventPath(id))
+        && counter.count == get(counterPath()).data.count + 1
+        && counter.mappedLikeCount == get(counterPath()).data.get('mappedLikeCount', 0) + 1
+        && counter.lastLikeId == id && counter.lastLikedAt == request.time
+        && visitor.lastLikeId == id && visitor.lastLikedAt == request.time
+        && event.visitorId == request.auth.uid && event.createdAt == request.time
+        && !exists(starPath(id)) && star.createdAt == request.time;
+    }
+    function validLocation(location) {
+      return location == null || (location is map
+        && location.keys().hasAll(['city', 'region', 'country', 'countryCode'])
+        && location.keys().hasOnly(['city', 'region', 'country', 'countryCode', 'latitude', 'longitude'])
+        && location.city is string && location.city.size() <= 100
+        && location.region is string && location.region.size() <= 100
+        && location.country is string && location.country.size() <= 100
+        && location.countryCode is string && location.countryCode.size() <= 100
+        && (location.get('latitude', null) == null || (location.latitude is int && location.latitude >= -90 && location.latitude <= 90))
+        && (location.get('longitude', null) == null || (location.longitude is int && location.longitude >= -180 && location.longitude <= 180)));
+    }
+    function validPosition(id) {
+      let star = request.resource.data;
+      let location = getAfter(eventPath(id)).data.location;
+      let located = location != null && location.get('latitude', null) != null && location.get('longitude', null) != null;
+      return star.keys().hasAll(['x', 'y', 'located', 'createdAt'])
+        && star.keys().hasOnly(['x', 'y', 'located', 'createdAt'])
+        && star.located == located
+        && (located
+          ? star.x == (location.longitude + 180) / 360.0 && star.y == (90 - location.latitude) / 180.0
+          : star.x == 0.5 && star.y == 0.9);
+    }
+    match /likes/portfolio {
+      allow get: if true;
+      allow update: if signedIn()
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['count', 'mappedLikeCount', 'lastLikeId', 'lastLikedAt'])
+        && request.resource.data.count is int
+        && request.resource.data.mappedLikeCount is int
+        && request.resource.data.lastLikeId is string
+        && validCommit(request.resource.data.lastLikeId);
+      match /visitors/{uid} {
+        allow get: if signedIn() && request.auth.uid == uid;
+        allow create, update: if signedIn() && request.auth.uid == uid
+          && request.resource.data.keys().hasAll(['lastLikedAt', 'lastLikeId'])
+          && request.resource.data.keys().hasOnly(['lastLikedAt', 'lastLikeId'])
+          && request.resource.data.lastLikeId is string
+          && validCommit(request.resource.data.lastLikeId);
+      }
+      match /events/{id} {
+        // Only administrators can read location history through the Console.
+        allow create: if signedIn()
+          && request.resource.data.keys().hasAll(['visitorId', 'createdAt', 'location'])
+          && request.resource.data.keys().hasOnly(['visitorId', 'createdAt', 'location'])
+          && validLocation(request.resource.data.location)
+          && validCommit(id);
+      }
+      match /stars/{id} {
+        // Only coarse positions are public, never city names or visitor IDs.
+        allow get: if true;
+        allow list: if true;
+        allow create: if signedIn() && validPosition(id) && validCommit(id);
+      }
+    }
+  }
+}

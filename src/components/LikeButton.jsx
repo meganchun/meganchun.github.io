@@ -1,10 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { onSnapshot } from "firebase/firestore";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { COOLDOWN_MS, counterRef, visitorRef, getVisitorId, nextLikeAt, getLikeLocation, submitLike, notifyLike } from "../services/likes";
 
-export default function LikeButton() {
+export default function LikeButton({ onStarSaved }) {
   const [likes, setLikes] = useState(null);
   const [uid, setUid] = useState(null);
   const [ready, setReady] = useState(false);
@@ -13,7 +11,15 @@ export default function LikeButton() {
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
   const [retry, setRetry] = useState(0);
+  const buttonRef = useRef(null);
   const inFlight = useRef(false);
+
+  const launchStar = (star) => {
+    const origin = buttonRef.current?.querySelector('.star-button-icon')?.getBoundingClientRect();
+    if (star && origin) onStarSaved?.(star, {
+      x: origin.left + origin.width / 2, y: origin.top + origin.height / 2,
+    });
+  };
 
   useEffect(() => {
     let active = true;
@@ -59,12 +65,14 @@ export default function LikeButton() {
 
   const handleLike = async () => {
     if (inFlight.current || !ready || likes === null || remaining > 0) return;
+    buttonRef.current?.focus();
     inFlight.current = true;
     setSubmitting(true);
     setError("");
     try {
       const location = await getLikeLocation();
-      await submitLike(uid, location);
+      const result = await submitLike(uid, location);
+      launchStar(result?.star);
       // Live snapshots supply the authoritative count and server timestamp.
       setAvailableAt((previous) => Math.max(previous, Date.now() + COOLDOWN_MS));
       setNow(Date.now());
@@ -83,26 +91,22 @@ export default function LikeButton() {
   };
 
   return (
-    <div className="fixed bottom-2 left-1/2 transform -translate-x-1/2 z-[100]">
-      <div className="bg-[#fff]/90 backdrop-blur-lg px-3 py-2 rounded-2xl text-primary text-center">
-        <button type="button" onClick={handleLike}
-          disabled={!ready || likes === null || submitting || remaining > 0}
-          aria-label={remaining > 0 ? `Like available in ${cooldownText}` : "Like this portfolio"}
-          aria-describedby="like-status"
-          className="flex flex-row gap-2 items-center mx-auto disabled:opacity-60 disabled:cursor-not-allowed">
-          <span className="w-7 h-7 bg-primary-light rounded-full flex items-center justify-center">
-            <FontAwesomeIcon icon={faHeart} aria-hidden="true" />
-          </span>
-          <span>{likes === null ? "…" : likes.toLocaleString()}</span>
-          {submitting && <span className="text-xs">Saving…</span>}
-          {remaining > 0 && !submitting && <span className="text-xs tabular-nums">{cooldownText}</span>}
-        </button>
-        <p id="like-status" className="text-xs mt-1" role="status">
-          {error || (remaining > 0 ? "Thanks! You can like again in five minutes." : "One like per browser every five minutes.")}
-        </p>
-        <p className="text-xs mt-1 opacity-70">Approximate location is saved with your like.</p>
-        {!ready && error && <button type="button" className="text-xs underline mt-1" onClick={() => setRetry((value) => value + 1)}>Retry</button>}
-      </div>
+    <div className="star-button-wrapper">
+      <button type="button" ref={buttonRef}
+        onClick={handleLike}
+        disabled={submitting || !ready || likes === null || remaining > 0}
+        aria-label={remaining > 0 ? `Star available in ${cooldownText}` : "Leave a star for this portfolio"}
+        aria-describedby="star-location-message like-status"
+        className="star-button">
+        <span className="star-button-icon" aria-hidden="true">✦</span>
+        <span>{submitting ? "Saving…" : remaining > 0 ? "Star left" : "Leave a star"}</span>
+        {likes !== null && <span className="star-count">{likes.toLocaleString()}</span>}
+      </button>
+      <p id="star-location-message" className="star-location-note">Your approximate location places your star in the sky.</p>
+      <p id="like-status" className="star-status" role="status">
+        {error ? error.replace(/Likes/g, "Stars").replace(/like/g, "star") : remaining > 0 ? `Thank you! Another star in ${cooldownText}.` : ""}
+      </p>
+      {!ready && error && <button type="button" className="star-retry" onClick={() => setRetry((value) => value + 1)}>Retry</button>}
     </div>
   );
 }
