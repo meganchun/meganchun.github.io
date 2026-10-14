@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.3bb6d258.css",
-    "main.js": "/static/js/main.4d67bddb.js",
+    "main.css": "/static/css/main.cf25ca98.css",
+    "main.js": "/static/js/main.cb945a43.js",
     "static/media/uw-blueprint-logo.png": "/static/media/uw-blueprint-logo.2757be193ecd6755c0fc.png",
     "static/media/ignition-hacks.png": "/static/media/ignition-hacks.4e840fac769d77a1add6.png",
     "static/media/folio-logo.png": "/static/media/folio-logo.1e07983b95424fd26485.png",
@@ -18,11 +18,11 @@
     "static/media/newsflix.png": "/static/media/newsflix.9e18602b9fd1df35277a.png",
     "static/media/sun.png": "/static/media/sun.72a22b510f9a5661b7ca.png",
     "index.html": "/index.html",
-    "main.3bb6d258.css.map": "/static/css/main.3bb6d258.css.map",
-    "main.4d67bddb.js.map": "/static/js/main.4d67bddb.js.map"
+    "main.cf25ca98.css.map": "/static/css/main.cf25ca98.css.map",
+    "main.cb945a43.js.map": "/static/js/main.cb945a43.js.map"
   },
   "entrypoints": [
-    "static/css/main.3bb6d258.css",
-    "static/js/main.4d67bddb.js"
+    "static/css/main.cf25ca98.css",
+    "static/js/main.cb945a43.js"
   ]
 }
