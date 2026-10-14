@@ -30,7 +30,7 @@ export default function ProjectCard({ project, isCenter }) {
       <div className="w-full text-start mt-2">
         <div className=" flex text-text justify-between">
           <p className="font-medium">{project.name}</p>
-          <p className="font-medium">2025</p>
+          <p className="font-medium">{project.year}</p>
         </div>
 
         <p className="font-light text-xs text-text-secondary">
