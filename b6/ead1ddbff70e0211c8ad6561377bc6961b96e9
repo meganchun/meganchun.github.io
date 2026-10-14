@@ -1,0 +1,19 @@
+public/index.html
+  s_d9688c67027894::t_a5b93645377670 45-46
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "b6ead1ddbff70e0211c8ad6561377bc6961b96e9",
+  "prompts": {},
+  "sessions": {
+    "s_d9688c67027894": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a13aa3-ddf6-79b0-a9d7-21d15d822d4d",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Megan Chun <107379096+meganchun@users.noreply.github.com>"
+    }
+  }
+}
