@@ -1,9 +1,22 @@
-import React, { useEffect, useRef } from 'react';
-import { projectStar } from '../services/starPositions';
+import React, { useEffect, useRef, useState } from 'react';
+import { projectSkyStars } from '../services/starPositions';
 import { nearbyConstellation, constellationEdges } from '../services/constellation';
+import { starPlacedAgo, starGlareOpacity } from '../services/starAppearance';
 
-export default function ConstellationReveal({ stars }) {
+export default function ConstellationReveal({ stars, hiddenStarId }) {
   const canvasRef = useRef(null);
+  const [hovered, setHovered] = useState(null);
+  const [now, setNow] = useState(Date.now());
+  useEffect(() => {
+    if (!hovered) return;
+    setNow(Date.now());
+    const timer = setInterval(() => {
+      const time = Date.now();
+      setNow(time);
+      if (starGlareOpacity(hovered.star, time) === 0) setHovered(null);
+    }, 1000);
+    return () => clearInterval(timer);
+  }, [hovered]);
   useEffect(() => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
@@ -25,8 +38,9 @@ export default function ConstellationReveal({ stars }) {
       width = bounds.width; height = bounds.height;
       dpr = Math.min(window.devicePixelRatio || 1, 2);
       canvas.width = Math.round(width * dpr); canvas.height = Math.round(height * dpr);
-      projected = stars.map((star) => projectStar(star, width, height));
+      projected = projectSkyStars(stars, width, height).filter((star) => star.id !== hiddenStarId);
       points.clear(); edges.clear();
+      setHovered(null);
       wake();
     }
     function move(event) {
@@ -34,13 +48,26 @@ export default function ConstellationReveal({ stars }) {
       const rect = canvas.getBoundingClientRect();
       const x = event.clientX - rect.left, y = event.clientY - rect.top;
       pointer = x >= 0 && x <= width && y >= 0 && y <= height ? { x, y } : null;
+      let closest = null, distance = 18;
+      const overControl = event.target?.closest?.('a, button, input, textarea, select, .sun, .intro h1, .intro p');
+      if (pointer && !overControl) projected.forEach((star) => {
+        if (!starPlacedAgo(star) || starGlareOpacity(star) === 0) return;
+        const length = Math.hypot(star.px - x, star.py - y);
+        if (length < distance) { closest = star; distance = length; }
+      });
+      setHovered((previous) => {
+        if (!closest) return null;
+        if (previous?.star.id === closest.id) return previous;
+        return { star: closest, x: Math.max(Math.min(100, width / 2), Math.min(width - 100, closest.px)), y: Math.max(32, closest.py - 20) };
+      });
       wake();
     }
-    function leave() { pointer = null; wake(); }
+    function leave() { pointer = null; setHovered(null); wake(); }
     function visibility() {
       if (document.hidden) {
         cancelAnimationFrame(frame); frame = null; lastTime = null;
         pointer = null; points.clear(); edges.clear();
+        setHovered(null);
         ctx.clearRect(0, 0, canvas.width, canvas.height);
       } else wake();
     }
@@ -107,6 +134,11 @@ export default function ConstellationReveal({ stars }) {
       window.removeEventListener('scroll', leave);
       document.removeEventListener('visibilitychange', visibility);
     };
-  }, [stars]);
-  return <canvas ref={canvasRef} className="constellation-reveal" aria-hidden="true" />;
+  }, [stars, hiddenStarId]);
+  return <>
+    <canvas ref={canvasRef} className="constellation-reveal" aria-hidden="true" />
+    {hovered && starGlareOpacity(hovered.star, now) > 0 && <span className="star-age-tooltip" role="tooltip" style={{ left: hovered.x, top: hovered.y }}>
+      {starPlacedAgo(hovered.star, now)}
+    </span>}
+  </>;
 }

@@ -1,4 +1,4 @@
-import { AGE_STEPS, nextSizeChange, starRadius } from './starAppearance';
+import { AGE_STEPS, nextSizeChange, starRadius, starPlacedAgo, starGlareOpacity, nextGlareChange } from './starAppearance';
 const now = 20000000000;
 const star = (age) => ({ createdAt: { toMillis: () => now - age } });
 
@@ -20,4 +20,30 @@ it('updates only at the earliest upcoming size boundary', () => {
 });
 it('caps future timestamps at the newest appearance', () => {
   expect(starRadius(star(-1000), now)).toBe(3.2);
+});
+
+it('describes star ages without inventing dates for historical or undated stars', () => {
+  expect(starPlacedAgo(star(59000), now)).toBe('Placed just now');
+  expect(starPlacedAgo(star(60000), now)).toBe('Placed 1 minute ago');
+  expect(starPlacedAgo(star(5 * 60000), now)).toBe('Placed 5 minutes ago');
+  expect(starPlacedAgo(star(3600000), now)).toBe('Placed 1 hour ago');
+  expect(starPlacedAgo(star(2 * 86400000), now)).toBe('Placed 2 days ago');
+  expect(starPlacedAgo(star(-1000), now)).toBe('Placed just now');
+  expect(starPlacedAgo({ historical: true, ...star(0) }, now)).toBeNull();
+  expect(starPlacedAgo({}, now)).toBeNull();
+});
+
+it('fades visitor glares in their final hour and removes them at one day', () => {
+  const hour = 3600000;
+  expect(starGlareOpacity(star(0), now)).toBe(1);
+  expect(starGlareOpacity(star(23 * hour), now)).toBe(1);
+  expect(starGlareOpacity(star(23.5 * hour), now)).toBe(.5);
+  expect(starGlareOpacity(star(24 * hour), now)).toBe(0);
+  expect(starGlareOpacity(star(48 * hour), now)).toBe(0);
+  expect(starGlareOpacity({ historical: true }, now)).toBe(1);
+  expect(starGlareOpacity({}, now)).toBe(0);
+  expect(nextGlareChange([star(0)], now)).toBe(now + 23 * hour);
+  expect(nextGlareChange([star(23.5 * hour)], now)).toBe(now + 60000);
+  expect(nextGlareChange([star(24 * hour - 1000)], now)).toBe(now + 1000);
+  expect(nextGlareChange([star(24 * hour)], now)).toBe(Infinity);
 });

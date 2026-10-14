@@ -1,7 +1,7 @@
 import React, { act } from 'react';
 import { createRoot } from 'react-dom/client';
 import StarFlight from './StarFlight';
-import { projectStar } from '../services/starPositions';
+import { projectSkyStars } from '../services/starPositions';
 
 test.each([false, true])('lands at the saved sky position with reduced motion = %s', (reduced) => {
   global.IS_REACT_ACT_ENVIRONMENT = true;
@@ -19,11 +19,13 @@ test.each([false, true])('lands at the saved sky position with reduced motion = 
   const originalMatchMedia = window.matchMedia;
   window.matchMedia = () => ({ matches: reduced });
   const start = jest.spyOn(performance, 'now').mockReturnValue(0);
-  const star = { id: 'saved-star', x: .3, y: .4, located: true };
+  const star = { id: 'saved-star', x: .3, y: .4, located: true, createdAt: { toMillis: () => 2 } };
+  const older = { ...star, id: 'older-star', createdAt: { toMillis: () => 1 } };
+  const positionRef = { current: (star, width, height) => projectSkyStars([older, star], width, height).find((point) => point.id === star.id) };
   const skyRef = { current: { getBoundingClientRect: () => ({ left: 0, top: -scroll, width: 1000, height: 700 }) } };
   const onArrival = jest.fn();
   try {
-    act(() => root.render(<StarFlight flight={{ star, origin: { x: 500, y: 700 } }} skyRef={skyRef} onArrival={onArrival} />));
+    act(() => root.render(<StarFlight flight={{ star, origin: { x: 500, y: 700 } }} skyRef={skyRef} positionRef={positionRef} onArrival={onArrival} />));
     expect(document.querySelector('.star-flight-glare')).toBeNull();
     if (!reduced) {
       act(() => tick(850));
@@ -34,7 +36,7 @@ test.each([false, true])('lands at the saved sky position with reduced motion = 
     }
     act(() => tick(1700));
     expect(onArrival).toHaveBeenCalledTimes(1);
-    const target = projectStar(star, 1000, 700);
+    const target = positionRef.current(star, 1000, 700);
     const sprite = document.querySelector('.star-flight-landed');
     expect(sprite.querySelector('.star-flight-glare')).not.toBeNull();
     expect(parseFloat(sprite.style.left)).toBeCloseTo(target.px);

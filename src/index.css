@@ -28,7 +28,7 @@ button:focus-visible, a:focus-visible { outline: 2px solid #a3baff; outline-offs
 .space-background { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
 .star-field { position: absolute; top: 0; width: 100%; height: 1400px; mask-image: linear-gradient(#000 45%, transparent 100%); }
 .sky-star { position: absolute; border-radius: 50%; background: #d8b7c4; box-shadow: 0 0 5px 1px #dcaac16b; }
-.sun { position: absolute; top: clamp(70px, 8.5vw, 130px); left: calc(50% - 370px); width: 300px; mix-blend-mode: screen; z-index: 3; pointer-events: none; }
+.sun { position: absolute; top: clamp(70px, 8.5vw, 130px); left: calc(50% - 370px); width: 300px; mix-blend-mode: screen; z-index: 40; pointer-events: none; }
 .sun { opacity: 0; transition: opacity 1.6s cubic-bezier(.22, 1, .36, 1); }
 .like-sky.is-ready + .sun { opacity: 1; }
 .sun img {
@@ -179,6 +179,7 @@ h2 { margin: 0; font: 300 20px/1.4 "IBM Plex Mono", monospace; letter-spacing: -
 .like-sky > canvas { opacity: 0; transition: opacity 1.6s cubic-bezier(.22, 1, .36, 1); }
 .like-sky.is-ready > canvas { opacity: 1; }
 .like-sky .constellation-reveal { position: absolute; inset: 0; pointer-events: none; }
+.star-age-tooltip { position: absolute; z-index: 4; transform: translate(-50%, -100%); padding: 6px 10px; border: 1px solid #c8d5ff1c; border-radius: 8px; background: #202127; color: #d7dfea; font: 11px/1.4 var(--font-sans); white-space: nowrap; pointer-events: none; }
 @media (hover: hover) and (pointer: fine) {
   .like-sky > canvas:not(.constellation-reveal) { pointer-events: auto; cursor: none; }
   .sun, .sun::after { cursor: none; }

@@ -1,7 +1,7 @@
 import React, { act } from 'react';
 import { createRoot } from 'react-dom/client';
 import LikeSky from './LikeSky';
-import { projectStar } from '../services/starPositions';
+import { projectStar, projectSkyStars } from '../services/starPositions';
 import { onSnapshot } from 'firebase/firestore';
 
 jest.mock('../services/likes', () => ({ counterRef: 'counter' }));
@@ -37,8 +37,12 @@ test('new arrivals retain existing glares and stars awaiting live snapshots', ()
     return context.drawImage.mock.calls.filter(([image]) => image instanceof window.Image)
       .map(([, x, y, size]) => [x + size / 2, y + size / 2]);
   };
-  const first = { id: 'saved-first', x: .3, y: .3, located: true };
-  const second = { id: 'saved-second', x: .32, y: .31, located: true };
+  const savedAt = Date.now();
+  const first = { id: 'saved-first', x: .3, y: .3, located: true, createdAt: { toMillis: () => savedAt - 300000 } };
+  const second = { id: 'saved-second', x: .32, y: .31, located: true, createdAt: { toMillis: () => savedAt } };
+  let tickAge;
+  const interval = jest.spyOn(window, 'setInterval').mockImplementation((callback) => { tickAge = callback; return 1; });
+  const clock = jest.spyOn(Date, 'now');
   try {
     act(() => root.render(<LikeSky />));
     const initial = glarePositions();
@@ -47,20 +51,33 @@ test('new arrivals retain existing glares and stars awaiting live snapshots', ()
     const withFirst = glarePositions();
     expect(withFirst).toEqual(expect.arrayContaining(initial));
     expect(withFirst).toHaveLength(initial.length + 1);
+    const firstPoint = projectStar(first, 1200, 800);
+    act(() => window.dispatchEvent(new MouseEvent('pointermove', { clientX: firstPoint.px, clientY: firstPoint.py })));
+    expect(container.querySelector('[role="tooltip"]').textContent).toBe('Placed 5 minutes ago');
+    act(() => window.dispatchEvent(new MouseEvent('pointermove', { clientX: 1100, clientY: 750 })));
+    expect(container.querySelector('[role="tooltip"]')).toBeNull();
     act(() => root.render(<LikeSky arrivingStar={second} arrived={false} />));
     expect(glarePositions()).toEqual(withFirst);
     act(() => root.render(<LikeSky arrivingStar={second} arrived />));
     const withBoth = glarePositions();
     expect(withBoth).toEqual(expect.arrayContaining(withFirst));
     expect(withBoth).toHaveLength(initial.length + 2);
-    for (const star of [first, second]) {
-      const point = projectStar(star, 1200, 800);
+    for (const point of projectSkyStars([first, second], 1200, 800)) {
       expect(withBoth.some(([x, y]) => Math.hypot(x - point.px, y - point.py) < .001)).toBe(true);
     }
     expect(container.querySelector('canvas').dataset.starCount).toBe('1002');
+    clock.mockReturnValue(first.createdAt.toMillis() + 86400000 - 500);
+    act(() => window.dispatchEvent(new MouseEvent('pointermove', { clientX: firstPoint.px, clientY: firstPoint.py })));
+    expect(container.querySelector('[role="tooltip"]')).not.toBeNull();
+    clock.mockReturnValue(first.createdAt.toMillis() + 86400000);
+    act(() => tickAge());
+    expect(container.querySelector('[role="tooltip"]')).toBeNull();
+    act(() => window.dispatchEvent(new MouseEvent('pointermove', { clientX: firstPoint.px, clientY: firstPoint.py })));
+    expect(container.querySelector('[role="tooltip"]')).toBeNull();
   } finally {
     act(() => root.unmount()); container.remove();
     getContext.mockRestore(); bounds.mockRestore();
+    interval.mockRestore(); clock.mockRestore();
     window.Image = originalImage; window.ResizeObserver = originalObserver;
   }
 });

@@ -2,12 +2,12 @@ import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
 import { counterRef } from '../services/likes';
 import { historicalStars } from '../services/historicalStars';
-import { projectStar, starOffset } from '../services/starPositions';
-import { nextSizeChange, starRadius } from '../services/starAppearance';
+import { projectSkyStars, starOffset } from '../services/starPositions';
+import { nextSizeChange, nextGlareChange, starGlareOpacity, starRadius } from '../services/starAppearance';
 import glareUrl from '../images/star-glare.png';
 import ConstellationReveal from './ConstellationReveal';
 
-export default function LikeSky({ canvasRef: suppliedCanvasRef, arrivingStar, arrived }) {
+export default function LikeSky({ canvasRef: suppliedCanvasRef, positionRef, arrivingStar, arrived }) {
   const ownCanvasRef = useRef(null);
   const canvasRef = suppliedCanvasRef || ownCanvasRef;
   const [recent, setRecent] = useState([]);
@@ -55,6 +55,21 @@ export default function LikeSky({ canvasRef: suppliedCanvasRef, arrivingStar, ar
 
   const backdrop = useMemo(() => historicalStars(historicalCount), [historicalCount]);
   const interactiveStars = useMemo(() => [...backdrop, ...visibleRecent], [backdrop, visibleRecent]);
+  const placementStars = useMemo(() => arrivingStar && !arrived ? [...interactiveStars, arrivingStar] : interactiveStars,
+    [interactiveStars, arrivingStar, arrived]);
+  const hiddenStarId = !arrived ? arrivingStar?.id : undefined;
+  useEffect(() => {
+    if (!positionRef) return;
+    let cachedWidth, cachedHeight, positions;
+    positionRef.current = (star, width, height) => {
+      if (!positions || width !== cachedWidth || height !== cachedHeight) {
+        positions = new Map(projectSkyStars(placementStars, width, height).map((point) => [point.id, point]));
+        cachedWidth = width; cachedHeight = height;
+      }
+      return positions.get(star.id);
+    };
+    return () => { positionRef.current = null; };
+  }, [positionRef, placementStars]);
   useEffect(() => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
@@ -80,9 +95,8 @@ export default function LikeSky({ canvasRef: suppliedCanvasRef, arrivingStar, ar
       canvas.width = Math.round(width * dpr);
       canvas.height = Math.round(height * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      const project = (star) => projectStar(star, width, height);
       // Draw every like, keeping the small points faint but visibly legible.
-      const dots = [...backdrop, ...visibleRecent].map(project);
+      const dots = projectSkyStars(placementStars, width, height).filter((star) => star.id !== hiddenStarId);
       if (dots.length > 0 && glareSettled) {
         cancelAnimationFrame(revealFrame);
         // Paint while transparent, then reveal the existing layer once.
@@ -113,7 +127,7 @@ export default function LikeSky({ canvasRef: suppliedCanvasRef, arrivingStar, ar
       ctx.globalAlpha = 1;
       // At most one connection per recent star; spatial buckets avoid all-pairs work.
       const cells = new Map();
-      visibleRecent.map(project).forEach((star) => {
+      dots.filter((star) => !star.historical).forEach((star) => {
         const bx = Math.floor(star.px / 40), by = Math.floor(star.py / 40);
         let nearest = null, distance = 35;
         for (let dx = -1; dx <= 1; dx++) for (let dy = -1; dy <= 1; dy++) {
@@ -137,6 +151,8 @@ export default function LikeSky({ canvasRef: suppliedCanvasRef, arrivingStar, ar
         // Select historical accents independently. Visitor arrivals must never
         // consume their budget or displace one through the spacing filter.
         for (const star of [...dots.filter((dot) => dot.historical), ...dots.filter((dot) => !dot.historical)]) {
+          const glareOpacity = starGlareOpacity(star, now);
+          if (glareOpacity === 0) continue;
           const scatter = starOffset(star.id);
           if (star.historical && scatter.u > 0.15) continue;
           if (star.historical && accents.length >= maxAccents) continue;
@@ -151,7 +167,7 @@ export default function LikeSky({ canvasRef: suppliedCanvasRef, arrivingStar, ar
           ctx.globalCompositeOperation = 'screen';
           // Tapered rays fade smoothly instead of enlarging the image's
           // thicker streaks. Keep the original glare asset for the centre.
-          ctx.globalAlpha = star.historical ? 0.75 : 1;
+          ctx.globalAlpha = star.historical ? 0.75 : glareOpacity;
           for (const angle of [Math.PI / 4, -Math.PI / 4]) {
             ctx.save();
             ctx.translate(star.px, star.py);
@@ -173,7 +189,7 @@ export default function LikeSky({ canvasRef: suppliedCanvasRef, arrivingStar, ar
             ctx.restore();
           }
           const coreSize = star.historical ? 27 : 22 + radius * 4;
-          ctx.globalAlpha = star.historical ? 0.9 : 1;
+          ctx.globalAlpha = star.historical ? 0.9 : glareOpacity;
           ctx.filter = 'blur(0.25px)';
           ctx.drawImage(glareImage, star.px - coreSize / 2, star.py - coreSize / 2, coreSize, coreSize);
           ctx.restore();
@@ -182,10 +198,10 @@ export default function LikeSky({ canvasRef: suppliedCanvasRef, arrivingStar, ar
     }
     const observer = new ResizeObserver(draw);
     observer.observe(canvas); draw();
-    // Schedule only age-boundary changes; no frame loop or frequent polling.
+    // Redraw at age boundaries, or once a minute during the final glare fade.
     let timer;
     function scheduleSizeChange() {
-      const boundary = nextSizeChange(recent);
+      const boundary = Math.min(nextSizeChange(visibleRecent), nextGlareChange(visibleRecent));
       if (!Number.isFinite(boundary)) return;
       timer = setTimeout(() => {
         if (!document.hidden) draw();
@@ -196,11 +212,11 @@ export default function LikeSky({ canvasRef: suppliedCanvasRef, arrivingStar, ar
     document.addEventListener('visibilitychange', visible);
     scheduleSizeChange();
     return () => { observer.disconnect(); clearTimeout(timer); cancelAnimationFrame(revealFrame); document.removeEventListener('visibilitychange', visible); };
-  }, [backdrop, recent, visibleRecent, glareImage, glareSettled, arrivingStar, canvasRef]);
+  }, [placementStars, hiddenStarId, visibleRecent, glareImage, glareSettled, canvasRef]);
 
   return <section className={`like-sky${revealed ? ' is-ready' : ''}`} aria-label="Visitor sky, mapped from approximate locations">
     <canvas ref={canvasRef} role="img" data-star-count={backdrop.length + visibleRecent.length}
       aria-label={`${historicalCount.toLocaleString()} historical likes distributed using estimated email shares, and ${recent.length} recent visitor stars. Longitude maps horizontally and latitude vertically.`} />
-    <ConstellationReveal stars={interactiveStars} />
+    <ConstellationReveal stars={placementStars} hiddenStarId={hiddenStarId} />
   </section>;
 }

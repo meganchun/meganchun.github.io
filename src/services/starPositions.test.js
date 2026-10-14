@@ -1,4 +1,4 @@
-import { locationToStar, starOffset, projectStar } from './starPositions';
+import { locationToStar, starOffset, projectStar, projectSkyStars } from './starPositions';
 import { allocateHistoricalLikes, historicalStars } from './historicalStars';
 
 it('maps north/south and east/west across the sky', () => {
@@ -43,4 +43,28 @@ it('keeps unknown locations unlocated and preserves one star per historical like
   expect(stars.filter((star) => !star.located)).toHaveLength(150);
   expect(historicalStars(7787)).toHaveLength(7787);
   expect(historicalStars(12001)).toHaveLength(12001);
+});
+
+it.each([[390, 680], [1200, 800]])('separates visitor glares within their region at %s×%s', (width, height) => {
+  const stars = Array.from({ length: 8 }, (_, index) => ({ id: `visitor-${index}`, ...locationToStar({ latitude: 43, longitude: -80 }), createdAt: { toMillis: () => index + 1 } }));
+  const layout = projectSkyStars(stars, width, height);
+  const clearance = Math.min(70, Math.max(40, width * .12));
+  layout.forEach((star, index) => {
+    const anchor = projectStar(stars[index], width, height);
+    expect(Math.hypot(star.px - anchor.px, star.py - anchor.py)).toBeLessThanOrEqual(Math.min(210, width * .35, height * .28) + .001);
+    for (const other of layout.slice(0, index)) expect(Math.hypot(star.px - other.px, star.py - other.py)).toBeGreaterThanOrEqual(clearance - .001);
+  });
+  const extended = projectSkyStars([...stars, { ...stars[0], id: 'new-arrival', createdAt: { toMillis: () => 100 } }], width, height);
+  expect(extended.slice(0, 8)).toEqual(layout);
+  expect(projectSkyStars([...stars].reverse(), width, height).reverse()).toEqual(layout);
+});
+
+it('leaves historical positions unchanged and avoids edge piles in crowded regions', () => {
+  const history = historicalStars(50);
+  expect(projectSkyStars(history, 390, 680)).toEqual(history.map((star) => projectStar(star, 390, 680)));
+  const visitors = Array.from({ length: 80 }, (_, index) => ({ id: `edge-${index}`, x: 0, y: 0, located: true, createdAt: { toMillis: () => index + 1 } }));
+  const result = projectSkyStars(visitors, 390, 680);
+  expect(result).toHaveLength(80);
+  expect(result.every((star) => star.px >= 4 && star.px <= 386 && star.py >= 4 && star.py <= 676)).toBe(true);
+  expect(result.filter((star) => star.px === 24 || star.py === 24)).toHaveLength(0);
 });

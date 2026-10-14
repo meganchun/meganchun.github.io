@@ -1,3 +1,5 @@
+import { createdAtMillis } from './starAppearance';
+
 // An illustrated sky projection of geography, not astronomical RA/Dec.
 export function locationToStar(location) {
   const latitude = location?.latitude;
@@ -44,4 +46,45 @@ export function projectStar(star, width, height) {
   const wrappedX = ((x - 4) % spanX + spanX) % spanX;
   const reflectedY = ((y - 4) % (2 * spanY) + 2 * spanY) % (2 * spanY);
   return { ...star, px: 4 + wrappedX, py: 4 + (reflectedY <= spanY ? reflectedY : 2 * spanY - reflectedY) };
+}
+
+export function projectSkyStars(stars, width, height) {
+  const projected = stars.map((star) => projectStar(star, width, height));
+  const visitors = projected.filter((star) => !star.historical)
+    .sort((a, b) => (createdAtMillis(a) ?? 0) - (createdAtMillis(b) ?? 0) || a.id.localeCompare(b.id));
+  const clearance = Math.min(70, Math.max(40, width * .12));
+  const reach = Math.min(210, width * .35, height * .28);
+  const cells = new Map();
+  const margin = Math.min(24, width / 4, height / 4);
+  function separation(x, y) {
+    const bx = Math.floor(x / clearance), by = Math.floor(y / clearance);
+    let nearest = clearance;
+    for (let dx = -1; dx <= 1; dx++) for (let dy = -1; dy <= 1; dy++) {
+      for (const other of cells.get(`${bx + dx},${by + dy}`) || []) {
+        nearest = Math.min(nearest, Math.hypot(x - other.px, y - other.py));
+      }
+    }
+    return nearest;
+  }
+  for (const star of visitors) {
+    const anchor = { x: star.px, y: star.py };
+    let best = { x: anchor.x, y: anchor.y, score: separation(anchor.x, anchor.y) };
+    const angle = starOffset(star.id).u * Math.PI * 2;
+    // Search outwards through an irregular spiral, staying near the geographic
+    // anchor. Earlier stars reserve their spots before newer stars are placed.
+    if (best.score < clearance) for (let index = 1; index <= 120; index++) {
+      const radius = reach * Math.sqrt(index / 120);
+      const theta = angle + index * Math.PI * (3 - Math.sqrt(5));
+      const x = anchor.x + Math.cos(theta) * radius, y = anchor.y + Math.sin(theta) * radius;
+      if (x < margin || x > width - margin || y < margin || y > height - margin) continue;
+      const score = separation(x, y);
+      if (score > best.score) best = { x, y, score };
+      if (score >= clearance) break;
+    }
+    star.px = best.x; star.py = best.y;
+    const key = `${Math.floor(star.px / clearance)},${Math.floor(star.py / clearance)}`;
+    if (!cells.has(key)) cells.set(key, []);
+    cells.get(key).push(star);
+  }
+  return projected;
 }

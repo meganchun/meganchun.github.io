@@ -41,14 +41,15 @@ function Experience({ title, entries }) {
 
 function App() {
   const skyRef = useRef(null);
+  const positionRef = useRef(null);
   const [flight, setFlight] = useState(null);
   return <div className="portfolio">
     <div className="space-background" aria-hidden="true">
       <img src={comet} className="comet" alt="" />
     </div>
-    <LikeSky canvasRef={skyRef} arrivingStar={flight?.star} arrived={flight?.arrived} />
+    <LikeSky canvasRef={skyRef} positionRef={positionRef} arrivingStar={flight?.star} arrived={flight?.arrived} />
     <div className="sun" aria-hidden="true"><img src={sun} alt="" /></div>
-    {flight && <StarFlight key={flight.star.id} flight={flight} skyRef={skyRef}
+    {flight && <StarFlight key={flight.star.id} flight={flight} skyRef={skyRef} positionRef={positionRef}
       onArrival={() => setFlight((current) => current ? { ...current, arrived: true } : current)} />}
     <ShootingStars />
     <main>

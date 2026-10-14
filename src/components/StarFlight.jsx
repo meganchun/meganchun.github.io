@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom';
 import { projectStar } from '../services/starPositions';
 import glareUrl from '../images/star-glare.png';
 
-export default function StarFlight({ flight, skyRef, onArrival }) {
+export default function StarFlight({ flight, skyRef, positionRef, onArrival }) {
   const spriteRef = useRef(null);
   const trailRef = useRef(null);
   const mistRef = useRef(null);
@@ -21,7 +21,8 @@ export default function StarFlight({ flight, skyRef, onArrival }) {
     const reducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
     const startScroll = window.scrollY;
     const bounds = canvas.getBoundingClientRect();
-    const point = projectStar(flight.star, bounds.width, bounds.height);
+    const position = (width, height) => positionRef?.current?.(flight.star, width, height) || projectStar(flight.star, width, height);
+    const point = position(bounds.width, bounds.height);
     const destinationY = bounds.top + startScroll + point.py;
     const endScroll = Math.min(startScroll, Math.max(0, destinationY - window.innerHeight * 0.38));
     const start = performance.now();
@@ -35,7 +36,7 @@ export default function StarFlight({ flight, skyRef, onArrival }) {
       // Re-measure so the star stays attached to its destination during scrolling
       // and viewport changes, including the mobile browser toolbar collapsing.
       const rect = canvas.getBoundingClientRect();
-      const target = projectStar(flight.star, rect.width, rect.height);
+      const target = position(rect.width, rect.height);
       const end = { x: rect.left + target.px, y: rect.top + target.py };
       const eased = progress * progress * (3 - 2 * progress);
       const arc = Math.sin(Math.PI * progress);
@@ -83,7 +84,7 @@ export default function StarFlight({ flight, skyRef, onArrival }) {
     }
     frame = requestAnimationFrame(animate);
     return () => { cancelAnimationFrame(frame); clearTimeout(timer); };
-  }, [flight.star, flight.origin, skyRef]);
+  }, [flight.star, flight.origin, skyRef, positionRef]);
 
   if (finished) return null;
   return createPortal(<div className="star-flight-scene" aria-hidden="true">
