@@ -1,0 +1,22 @@
+CNAME
+  h_fb17293b7206a8 1
+asset-manifest.json
+  h_fb17293b7206a8 3,21,25
+index.html
+  h_fb17293b7206a8 1
+static/css/main.3bb6d258.css
+  h_fb17293b7206a8 3-4
+static/css/main.3bb6d258.css.map
+  h_fb17293b7206a8 1
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "f69b1ad596f152654872f9cc680349b28a05b45d",
+  "prompts": {},
+  "humans": {
+    "h_fb17293b7206a8": {
+      "author": "Megan Chun <107379096+meganchun@users.noreply.github.com>"
+    }
+  }
+}
