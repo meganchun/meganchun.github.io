@@ -1,0 +1,16 @@
+index.html
+  h_fb17293b7206a8 1
+manifest.json
+  h_fb17293b7206a8 2-3,6-8,11,16,23-24
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "5d9b40e39b313b8b0955e806886d4e88de7465aa",
+  "prompts": {},
+  "humans": {
+    "h_fb17293b7206a8": {
+      "author": "Megan Chun <107379096+meganchun@users.noreply.github.com>"
+    }
+  }
+}
