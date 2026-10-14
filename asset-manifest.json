@@ -1,7 +1,13 @@
 {
   "files": {
-    "main.css": "/static/css/main.c81bacd7.css",
-    "main.js": "/static/js/main.ff2ee271.js",
+    "main.css": "/static/css/main.4a3c45bc.css",
+    "main.js": "/static/js/main.4d67bddb.js",
+    "static/media/uw-blueprint-logo.png": "/static/media/uw-blueprint-logo.2757be193ecd6755c0fc.png",
+    "static/media/ignition-hacks.png": "/static/media/ignition-hacks.4e840fac769d77a1add6.png",
+    "static/media/folio-logo.png": "/static/media/folio-logo.1e07983b95424fd26485.png",
+    "static/media/8090-logo.png": "/static/media/8090-logo.45fabf5447cf8cd55cff.png",
+    "static/media/hack-the-north.png": "/static/media/hack-the-north.fbf1937e2b3a5fe250ac.png",
+    "static/media/large-comet.png": "/static/media/large-comet.e696971c8121587aa745.png",
     "static/media/lit(m).png": "/static/media/lit(m).ef865adf12b41962e65b.png",
     "static/media/binge.png": "/static/media/binge.b904ccaf3476c45c5bfd.png",
     "static/media/findmyuni.png": "/static/media/findmyuni.e15f9a6e91bc5d6ca78b.png",
@@ -10,17 +16,13 @@
     "static/media/super-foodio.png": "/static/media/super-foodio.1eeab3cae8682529a1a5.png",
     "static/media/meglino.png": "/static/media/meglino.b34060c0c13ce352d983.png",
     "static/media/newsflix.png": "/static/media/newsflix.9e18602b9fd1df35277a.png",
-    "static/media/hack-the-north.png": "/static/media/hack-the-north.0464244d7574735219b1.png",
-    "static/media/uw-blueprint.png": "/static/media/uw-blueprint.29df6b6376a9774bf5b5.png",
-    "static/media/revicons.eot": "/static/media/revicons.a77de540a38981833f9e.eot",
-    "static/media/revicons.ttf": "/static/media/revicons.57fd05d4ae650374c8de.ttf",
-    "static/media/revicons.woff": "/static/media/revicons.e8746a624ed098489406.woff",
+    "static/media/sun.png": "/static/media/sun.72a22b510f9a5661b7ca.png",
     "index.html": "/index.html",
-    "main.c81bacd7.css.map": "/static/css/main.c81bacd7.css.map",
-    "main.ff2ee271.js.map": "/static/js/main.ff2ee271.js.map"
+    "main.4a3c45bc.css.map": "/static/css/main.4a3c45bc.css.map",
+    "main.4d67bddb.js.map": "/static/js/main.4d67bddb.js.map"
   },
   "entrypoints": [
-    "static/css/main.c81bacd7.css",
-    "static/js/main.ff2ee271.js"
+    "static/css/main.4a3c45bc.css",
+    "static/js/main.4d67bddb.js"
   ]
 }
