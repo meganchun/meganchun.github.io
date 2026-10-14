@@ -1,0 +1,33 @@
+public/index.html
+  s_8850f0e059b122::t_7f704ffebedc81 17-18,26
+public/CNAME
+  s_8850f0e059b122::t_7f704ffebedc81 1
+src/index.css
+  s_d9688c67027894::t_6c54f0733d4be3 173-178
+package.json
+  s_8850f0e059b122::t_7f704ffebedc81 3
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "b25e06abf9ab6de27b4357348cd78ae29fd50108",
+  "prompts": {},
+  "sessions": {
+    "s_8850f0e059b122": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a13aba-d639-7f50-8100-de33037c51cb",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Megan Chun <107379096+meganchun@users.noreply.github.com>"
+    },
+    "s_d9688c67027894": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a13aa3-ddf6-79b0-a9d7-21d15d822d4d",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Megan Chun <107379096+meganchun@users.noreply.github.com>"
+    }
+  }
+}
