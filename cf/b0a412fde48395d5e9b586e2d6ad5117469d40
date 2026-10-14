@@ -1,0 +1,19 @@
+src/components/LikeButton.jsx
+  s_c2f043512d68f7::t_7361bc5a9b2e34 1-2,5,9-16,19-48,50,52-55,57-58,60-64,66-81,87-104
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "cfb0a412fde48395d5e9b586e2d6ad5117469d40",
+  "prompts": {},
+  "sessions": {
+    "s_c2f043512d68f7": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1375f-0a93-7cd2-bc99-5fc5bc321a17",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Megan Chun <107379096+meganchun@users.noreply.github.com>"
+    }
+  }
+}
