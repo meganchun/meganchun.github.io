@@ -1,0 +1,232 @@
+src/services/historicalStars.js
+  s_c2f043512d68f7::t_b2ddc4de231777 1-32,35-40
+  s_c2f043512d68f7::t_0054238a6b3ea2 33-34
+src/components/LikeSky.test.jsx
+  s_d9688c67027894::t_16eabc2965010e 13,40-41
+  s_d9688c67027894::t_c96cad9887c3ea 1-4,6-9,11-12,14,19-39,42-66
+  s_d9688c67027894::t_07580c1db5fb29 5,10,15-18
+src/components/Carousel.jsx
+  s_bc07b19ff87c03::t_20be7a2907dbc4 148-152
+  s_bc07b19ff87c03::t_09b766663cc39e 27-28,30,47-48,50-51,59,61-63,65,71-72,95-100,105-106,108,110-120,122,124,128-130
+  s_bc07b19ff87c03::t_650573cbb41ce1 147
+  s_bc07b19ff87c03::t_dae3c8e0a1f49a 104,136
+  s_bc07b19ff87c03::t_f41637bca9704e 1,12-13,17-18,24-26,29,31-45,49,52-58,60,64,66-70,73-78,81,84-92,103,107,109,121,123,125-127,134-135,137-143
+  s_5247fe825f6baa::t_564098f5b1fc90 2-11,14-16,19-20,23,79-80,82-83,93,101-102,131-133,144-146,154
+src/components/ConstellationReveal.jsx
+  s_d9688c67027894::t_06a662f5b6d568 1-76,79-84,87-88,91-112
+  s_d9688c67027894::t_620320ff77bcc7 77-78,85-86,89-90
+src/components/ShootingStars.jsx
+  s_c2f043512d68f7::t_fc07d5bca14348 1-18,20-68
+  s_bc07b19ff87c03::t_df20d061f5df94 19
+src/services/likes.test.js
+  s_d9688c67027894::t_30fc184400260f 34,71
+  s_c2f043512d68f7::t_c93e19ea0d252f 36,41-42,97-98
+  s_8850f0e059b122::t_4c1ff648a8ff25 54-68
+  s_c2f043512d68f7::t_2f5e17ef8f9781 1,3-21,25-33,35,37-40,43-53,69-70,72-73,84-96,99-117
+  s_c2f043512d68f7::t_87f3a66cf7b168 74-83
+  s_c2f043512d68f7::t_16357eaba403d1 2,22-24
+src/services/constellation.js
+  s_d9688c67027894::t_06a662f5b6d568 1-8,10,12-17,38,44-45
+  s_d9688c67027894::t_620320ff77bcc7 9,11,18-37,39-43
+src/services/starAppearance.test.js
+  s_c2f043512d68f7::t_2b3b1c3cab5278 1-23
+src/services/starPositions.test.js
+  s_c2f043512d68f7::t_1c1a2a1ea3d908 1,17-29
+  s_c2f043512d68f7::t_c93e19ea0d252f 2-16,30-40,42-43,46
+  s_c2f043512d68f7::t_0054238a6b3ea2 41,44-45
+src/App.js
+  s_d9688c67027894::t_e6a2f5bd91d2b9 1,6,43-44,49,52,69
+  s_c2f043512d68f7::t_374d86b806b723 5
+  s_c2f043512d68f7::t_fc07d5bca14348 7,53
+  s_bc07b19ff87c03::t_89fb2ebd2b4894 17-19,22-26,33,37
+  s_5247fe825f6baa::t_564098f5b1fc90 8-16,20-21,27-32,34-36,38-40,45-47,54-58,60-68,70
+  s_28eb036ea4bc58::t_eb1f80e49eb58d 2,59
+  s_c2f043512d68f7::t_fcaba420036ff4 50
+  s_d9688c67027894::t_30fc184400260f 51
+src/components/LikeButton.test.jsx
+  s_8850f0e059b122::t_4c1ff648a8ff25 14,67-83
+  s_bf92177c046283::t_01942ff879355f 3,5,30-37
+  s_d9688c67027894::t_760a61fecdb67d 46,58-66,84-92
+  s_d9688c67027894::t_8c5951ae61c398 94
+  s_bf92177c046283::t_79b7f50b801ca7 1-2,4,6-13,15-29,38-45,47-48,50,52-53,55-57,93
+  s_d9688c67027894::t_054fcd77c7ed05 49,51,54
+src/components/StarFlight.test.jsx
+  s_d9688c67027894::t_c6a480e9e209e2 17-18,49-50
+  s_d9688c67027894::t_32eae050a438be 32-33,42,45
+  s_d9688c67027894::t_80153177d2726e 27,39
+  s_d9688c67027894::t_760a61fecdb67d 1-16,19-26,28-31,34-38,40-41,43-44,46-48,51-54
+src/index.css
+  s_d9688c67027894::t_a0d2db76724187 120-121
+  s_bc07b19ff87c03::t_650573cbb41ce1 101
+  s_bc07b19ff87c03::t_20b6c0898f0043 13
+  s_28eb036ea4bc58::t_eb1f80e49eb58d 74
+  s_c2f043512d68f7::t_3caa4245571a87 38-39,45,53,172,181-182
+  s_bc07b19ff87c03::t_89fb2ebd2b4894 78
+  s_5247fe825f6baa::t_562580f84cb387 60
+  s_d9688c67027894::t_653da6ea7598f0 177-178
+  s_c2f043512d68f7::t_fcdcd4e0d54332 41-44,46-48,59
+  s_bc07b19ff87c03::t_20be7a2907dbc4 104-110,165
+  s_8850f0e059b122::t_85257242f699c9 93,126,128
+  s_c2f043512d68f7::t_94f5eb42fa07ff 174-175
+  s_c2f043512d68f7::t_35566e671e8121 184-185
+  s_757796c7cb4bc5::t_de2103ad2f2a04 12,14,62,70
+  s_bf92177c046283::t_a26cf2a65077e0 113-116,118-119
+  s_d9688c67027894::t_06a662f5b6d568 176
+  s_bf92177c046283::t_017afab96cb645 111,167
+  s_c2f043512d68f7::t_0d67bf50497338 73
+  s_d9688c67027894::t_f10f82af6eb296 188-193,202
+  s_c2f043512d68f7::t_0ebeaed7972099 34-35,40,49
+  s_c2f043512d68f7::t_fcaba420036ff4 32-33
+  s_bc07b19ff87c03::t_5c48f315f18605 90,95,97-100,102-103,133-134,159-160,162-163,169
+  s_bc07b19ff87c03::t_6abb6d15b9ae66 83-87
+  s_bf92177c046283::t_dbc56d418d092d 112,137
+  s_d9688c67027894::t_1cd05d1da3db8d 179
+  s_5247fe825f6baa::t_564098f5b1fc90 6-9,15-17,19-30,61,63-69,71-72,77,79-82,89,94,96,117,122-124,127,129-132,136,138-149,151-156,158,161,164,166
+  s_bc07b19ff87c03::t_09b766663cc39e 91-92
+  s_c2f043512d68f7::t_a1f085cbd50379 171
+  s_d9688c67027894::t_f364a30e33008f 173,183
+  s_d9688c67027894::t_30fc184400260f 187,194-201,203
+  s_c2f043512d68f7::t_98893b4997293e 31,36-37,50-52,54-58
+  s_febac7482edc9d::t_7787d71d9ebbd8 75,125
+  s_c2f043512d68f7::t_fc07d5bca14348 135,168,204-215,217
+  s_bc07b19ff87c03::t_2b0060b44d15cc 76,88,150,157
+src/firebase.js
+  s_c2f043512d68f7::t_f7b930443d962e 24
+public/index.html
+  s_bc07b19ff87c03::t_20b6c0898f0043 29
+  s_5247fe825f6baa::t_0400ad6983ba6b 7,10,27-28,30
+src/services/starAppearance.js
+  s_c2f043512d68f7::t_2b3b1c3cab5278 1-34
+src/services/starPositions.js
+  s_c2f043512d68f7::t_1c1a2a1ea3d908 16-46
+  s_c2f043512d68f7::t_374d86b806b723 1-15,47
+tailwind.config.js
+  s_bc07b19ff87c03::t_20b6c0898f0043 14
+  s_757796c7cb4bc5::t_de2103ad2f2a04 13
+firestore.rules
+  s_c2f043512d68f7::t_b2ddc4de231777 21,52,54
+  s_c2f043512d68f7::t_7361bc5a9b2e34 1-7,9-10,12-16,18-20,22-23,26-29,31-33,37,49-51,53,55-71,78-81
+  s_c2f043512d68f7::t_374d86b806b723 8,17,24-25,30,34-36,38-48,72-75,77
+  s_8850f0e059b122::t_4c1ff648a8ff25 11
+  s_c2f043512d68f7::t_0054238a6b3ea2 76
+src/services/constellation.test.js
+  s_d9688c67027894::t_620320ff77bcc7 18,20-26
+  s_d9688c67027894::t_ed868d45963da7 1-17,19,27-28
+src/components/StarFlight.jsx
+  s_d9688c67027894::t_80153177d2726e 112
+  s_d9688c67027894::t_f10f82af6eb296 1,8-12,30,44-71,89-104,108-111,113
+  s_d9688c67027894::t_30fc184400260f 2-7,13-29,31-43,72-88,105-107,114-115
+src/components/LikeButton.jsx
+  s_d9688c67027894::t_16eabc2965010e 5,97,102,107
+  s_5247fe825f6baa::t_0400ad6983ba6b 98,100-101,103-104,106,108-109
+  s_d9688c67027894::t_3abf9cf64c80f9 17-23,75
+  s_d9688c67027894::t_e6a2f5bd91d2b9 74
+  s_bf92177c046283::t_9266b4701d90c3 14,68,95
+  s_d9688c67027894::t_054fcd77c7ed05 94,96,99,105
+src/components/LikeSky.jsx
+  s_c2f043512d68f7::t_221e15a4803e6b 63-64,66,75,93,113,141,144
+  s_c2f043512d68f7::t_1c1a2a1ea3d908 83
+  s_d9688c67027894::t_50b78222bab565 6,48,52,202
+  s_c2f043512d68f7::t_0054238a6b3ea2 2,49,56,94-95,97,99,101,105-108
+  s_c2f043512d68f7::t_2c476d025db4da 5,7,15,33-34,39,41-43,132-133,140,149-151,179-181
+  s_c2f043512d68f7::t_b100961335e049 65,67-74,76
+  s_c2f043512d68f7::t_57ccdd3e10d8b2 79,98,104,109-110
+  s_c2f043512d68f7::t_c10300f999277c 102-103
+  s_c2f043512d68f7::t_2b3b1c3cab5278 91,185-197
+  s_d9688c67027894::t_36c48b51abfd70 18-22,25-27,30,137-139,142,145-148
+  s_d9688c67027894::t_30fc184400260f 1,24,28-29
+  s_c2f043512d68f7::t_b2ddc4de231777 3-4,9,13-14,31-32,44-47,50-51,53-55,58-61,77-78,80-82,92,112,114-115,117-131,182-184,200,203,205-206
+  s_c2f043512d68f7::t_58eccce6a2b44e 152-177
+  s_d9688c67027894::t_06a662f5b6d568 8,57,204
+  s_c2f043512d68f7::t_d8ca13ef1ba8db 84,96,100,111
+  s_d9688c67027894::t_e6a2f5bd91d2b9 10-12,23,85,116
+  s_c2f043512d68f7::t_a3aea308c289ab 134,143,178
+  s_c2f043512d68f7::t_94f5eb42fa07ff 16-17,35-38,40,62,86-90,198-199,201
+  s_c2f043512d68f7::t_9edd2a8daf9fac 135-136
+src/services/likes.js
+  s_8850f0e059b122::t_4c1ff648a8ff25 6
+  s_c2f043512d68f7::t_b2ddc4de231777 72-76
+  s_d9688c67027894::t_760a61fecdb67d 80-81
+  s_c2f043512d68f7::t_374d86b806b723 4,41-46,79
+  s_c2f043512d68f7::t_7361bc5a9b2e34 1-3,5,7-40,47-71,77-78,82-92
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "b2e2c4e959519d94e68971b8ba711d2a881ce1ed",
+  "prompts": {},
+  "sessions": {
+    "s_28eb036ea4bc58": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a13872-9b11-74e0-b018-8700d446b01b",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Megan Chun <107379096+meganchun@users.noreply.github.com>"
+    },
+    "s_5247fe825f6baa": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a13861-b966-7811-b4c4-a2bb095e783d",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Megan Chun <107379096+meganchun@users.noreply.github.com>"
+    },
+    "s_757796c7cb4bc5": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a13870-1888-79d1-9a35-94247966e849",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Megan Chun <107379096+meganchun@users.noreply.github.com>"
+    },
+    "s_8850f0e059b122": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a13aba-d639-7f50-8100-de33037c51cb",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Megan Chun <107379096+meganchun@users.noreply.github.com>"
+    },
+    "s_bc07b19ff87c03": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a13873-5f9e-7ee0-af99-57316ecfdd6f",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Megan Chun <107379096+meganchun@users.noreply.github.com>"
+    },
+    "s_bf92177c046283": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a13874-cbd1-7532-9d56-98aad580afd9",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Megan Chun <107379096+meganchun@users.noreply.github.com>"
+    },
+    "s_c2f043512d68f7": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a1375f-0a93-7cd2-bc99-5fc5bc321a17",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Megan Chun <107379096+meganchun@users.noreply.github.com>"
+    },
+    "s_d9688c67027894": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a13aa3-ddf6-79b0-a9d7-21d15d822d4d",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Megan Chun <107379096+meganchun@users.noreply.github.com>"
+    },
+    "s_febac7482edc9d": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a13aa9-f036-7f51-9ef8-23c6d3586015",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Megan Chun <107379096+meganchun@users.noreply.github.com>"
+    }
+  }
+}
