@@ -5,6 +5,8 @@ import LikeButton from "./components/LikeButton";
 import LikeSky from "./components/LikeSky";
 import StarFlight from "./components/StarFlight";
 import ShootingStars from "./components/ShootingStars";
+import CurrentLocationTime from "./components/CurrentLocationTime";
+import { Location } from "./types/location";
 import sun from "./images/sun.png";
 import comet from "./images/large-comet.png";
 import logo8090 from "./images/8090-logo.png";
@@ -66,7 +68,7 @@ function App() {
         <Carousel3D />
       </section>
     </main>
-    <footer className="content-column footer"><span>© {new Date().getFullYear()} MEGAN</span><span>WATERLOO, ON</span></footer>
+    <footer className="content-column footer"><span>© {new Date().getFullYear()} MEGAN</span><CurrentLocationTime location={Location.Waterloo} /></footer>
     <LikeButton onStarSaved={(star, origin) => setFlight({ star, origin, arrived: false })} />
   </div>;
 }

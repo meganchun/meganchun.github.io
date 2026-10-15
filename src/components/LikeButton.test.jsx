@@ -91,4 +91,3 @@ test("failed saves leave the visitor in place without launching a star", async (
   expect(onStarSaved).not.toHaveBeenCalled();
   expect(container.querySelector('[role="status"]').textContent).toContain("Couldn't save your star");
 });
-

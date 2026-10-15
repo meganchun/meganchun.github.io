@@ -109,6 +109,9 @@ h2 { margin: 0; font: 300 20px/1.4 "IBM Plex Mono", monospace; letter-spacing: -
 .carousel-controls button svg { width: 18px; height: 18px; }
 .carousel-controls button:hover { color: var(--text); background: #ffffff08; }
 .footer { display: flex; justify-content: space-between; gap: 20px; margin-top: 185px; font: 400 12px/1.5 var(--font-mono); color: #777680; }
+.footer-location { white-space: nowrap; }
+.footer time { font-variant-numeric: tabular-nums; }
+@media (max-width: 380px) { .footer { flex-wrap: wrap; gap: 10px; } }
 .star-button-wrapper { position: fixed; bottom: calc(20px + env(safe-area-inset-bottom, 0px)); left: 50%; transform: translateX(-50%); z-index: 10; display: flex; flex-direction: column; align-items: center; margin: 0; text-align: center; width: min(420px, calc(100% - 48px)); }
 .star-button { display: flex; justify-content: center; align-items: center; gap: 9px; min-height: 44px; border: 1px solid #ffffff14; border-radius: 24px; padding: 9px 16px; background: linear-gradient(180deg, #292a31, #202127); color: #dedde5; font-size: 15px; font-weight: 500; line-height: 1.4; box-shadow: 0 4px 16px #0003, inset 0 1px 0 #ffffff05; cursor: pointer; transition: border-color .2s, box-shadow .2s, transform .2s; }
 .star-button:hover:not(:disabled) { border-color: #b6c3ff40; box-shadow: 0 4px 20px #0004, 0 0 16px #a3baff0c; transform: translateY(-1px); }
