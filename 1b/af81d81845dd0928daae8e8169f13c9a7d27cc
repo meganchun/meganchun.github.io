@@ -1,0 +1,24 @@
+asset-manifest.json
+  h_fb17293b7206a8 3-4,21-22,25-26
+index.html
+  h_fb17293b7206a8 1
+static/css/main.e553b7c7.css
+  h_fb17293b7206a8 3-4
+static/css/main.e553b7c7.css.map
+  h_fb17293b7206a8 1
+static/js/main.957a468f.js
+  h_fb17293b7206a8 1-3
+static/js/main.957a468f.js.map
+  h_fb17293b7206a8 1
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "1baf81d81845dd0928daae8e8169f13c9a7d27cc",
+  "prompts": {},
+  "humans": {
+    "h_fb17293b7206a8": {
+      "author": "Megan Chun <107379096+meganchun@users.noreply.github.com>"
+    }
+  }
+}
