@@ -1,0 +1,30 @@
+src/index.css
+  s_d6759d1e2a90c0::t_b6b86f51b35a58 112-114
+src/components/CurrentLocationTime.jsx
+  s_d6759d1e2a90c0::t_ce265d7bc5ac3f 3,5
+  s_d6759d1e2a90c0::t_113d44690a501c 1-2,4,6-25
+src/types/location.js
+  s_d6759d1e2a90c0::t_ce265d7bc5ac3f 1-15
+src/components/CurrentLocationTime.test.jsx
+  s_d6759d1e2a90c0::t_113d44690a501c 1-2,5-37
+  s_d6759d1e2a90c0::t_ce265d7bc5ac3f 3-4
+src/App.js
+  s_d6759d1e2a90c0::t_113d44690a501c 71
+  s_d6759d1e2a90c0::t_ce265d7bc5ac3f 8-9
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "c93c9dcae8d1106604991483cf2c77235b1005e4",
+  "prompts": {},
+  "sessions": {
+    "s_d6759d1e2a90c0": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a13fc8-21b8-7ec2-9c0d-b15c66e37a2e",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "Megan Chun <107379096+meganchun@users.noreply.github.com>"
+    }
+  }
+}
