@@ -1,11 +1,11 @@
 {
   "files": {
     "main.css": "/static/css/main.cf25ca98.css",
-    "main.js": "/static/js/main.cb945a43.js",
+    "main.js": "/static/js/main.9e193e7f.js",
     "static/media/uw-blueprint-logo.png": "/static/media/uw-blueprint-logo.2757be193ecd6755c0fc.png",
     "static/media/ignition-hacks.png": "/static/media/ignition-hacks.4e840fac769d77a1add6.png",
+    "static/media/8090-logo.png": "/static/media/8090-logo.40e604dc4f6ddac93594.png",
     "static/media/folio-logo.png": "/static/media/folio-logo.1e07983b95424fd26485.png",
-    "static/media/8090-logo.png": "/static/media/8090-logo.45fabf5447cf8cd55cff.png",
     "static/media/hack-the-north.png": "/static/media/hack-the-north.fbf1937e2b3a5fe250ac.png",
     "static/media/large-comet.png": "/static/media/large-comet.e696971c8121587aa745.png",
     "static/media/lit(m).png": "/static/media/lit(m).ef865adf12b41962e65b.png",
@@ -19,10 +19,10 @@
     "static/media/sun.png": "/static/media/sun.72a22b510f9a5661b7ca.png",
     "index.html": "/index.html",
     "main.cf25ca98.css.map": "/static/css/main.cf25ca98.css.map",
-    "main.cb945a43.js.map": "/static/js/main.cb945a43.js.map"
+    "main.9e193e7f.js.map": "/static/js/main.9e193e7f.js.map"
   },
   "entrypoints": [
     "static/css/main.cf25ca98.css",
-    "static/js/main.cb945a43.js"
+    "static/js/main.9e193e7f.js"
   ]
 }
