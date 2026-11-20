@@ -7,8 +7,10 @@ import newsflix from "../images/newsflix.png";
 import findMyUni from "../images/findmyuni.png";
 import bohnanza from "../images/bohnanza.png";
 import litm from "../images/lit(m).png";
+import worldWarPixel from "../images/world-war-pixel.png";
 
 const projects = [
+  { name: "World War Pixel", image: worldWarPixel, tech: "React · WebSockets · LLM Agents", link: "https://worldwarpixel.com/" },
   { name: "GoSnooze", image: goSnooze, tech: "React Native · TypeScript · Firebase", link: "https://github.com/meganchun/goSnooze" },
   { name: "Binge", image: binge, tech: "Java · Weka · FastAPI", link: "https://github.com/meganchun/Binge" },
   { name: "Super Foodio", image: foodio, tech: "Java", link: "https://github.com/meganchun/Super-Foodio" },
